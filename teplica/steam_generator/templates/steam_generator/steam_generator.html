@@ -1,0 +1,34 @@
+{% extends "main/index.html" %}
+{% block header %}Пароиспарение{% endblock %}
+{% block heading %}Здесь вы можете управлять пароиспарением!{% endblock %}
+{% block content %}
+  {% if error %}
+    <p>{{ error }}</p>
+  {% else %}
+    <form method="post">
+      {% csrf_token %}
+      
+      <p>Статус пароиспарения: {{ evaporation_settings.get_status_display }}</p>
+      <button type="submit" name="turn_on" {% if evaporation_settings.status == 'on' %}disabled{% endif %}>Включить пароиспарение</button>
+      <button type="submit" name="turn_off" {% if evaporation_settings.status == 'off' %}disabled{% endif %}>Выключить пароиспарение</button>
+      <br>
+
+      {% if evaporation_settings.status == 'on' %}
+        <label for="start_time">Время начала:</label>
+        <input type="time" id="start_time" name="start_time" value="{{ evaporation_settings.start_time|default_if_none:'' }}" />
+        <br>
+        <label for="duration">Длительность (минуты):</label>
+        <input type="number" id="duration" name="duration" value="{{ evaporation_settings.duration }}" />
+        <br>
+        <button type="submit" name="save_settings">Сохранить настройки</button>
+      {% endif %}
+    </form>
+
+    <h3>Текущие настройки пароиспарения:</h3>
+    {% if evaporation_settings.status == 'on' %}
+      <p>Пароиспарение включено с {{ evaporation_settings.start_time }} на {{ evaporation_settings.duration }} минут.</p>
+    {% else %}
+      <p>Пароиспарение выключено.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

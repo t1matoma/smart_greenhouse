@@ -1,0 +1,56 @@
+{% extends "main/index.html" %}
+{% block header %}Температура и влажность{% endblock %}
+{% block heading %}Здесь вы можете управлять температурой и влажностью!{% endblock %}
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    
+    {% if temperature_enabled %}
+      <label for="temperature">Температура:</label>
+      <input type="number" id="temperature" name="temperature" max="{{ max_temperature }}" value="{{ temperature }}" />
+      <br>
+    {% else %}
+      <p>Температура выключена.</p>
+    {% endif %}
+    
+    {% if humidity_enabled %}
+      <label for="humidity">Влажность (%):</label>
+      <input type="number" id="humidity" name="humidity" value="{{ humidity }}" />
+      <br>
+    {% else %}
+      <p>Влажность выключена.</p>
+    {% endif %}
+    
+    <button type="submit" name="save_temperature">Сохранить температуру</button>
+    <button type="submit" name="save_humidity">Сохранить влажность</button>
+  </form>
+
+  <form method="post">
+    {% csrf_token %}
+    {% if temperature_enabled %}
+      <button type="submit" name="toggle_temperature">Выключить температуру</button>
+    {% else %}
+      <button type="submit" name="toggle_temperature">Включить температуру</button>
+    {% endif %}
+    
+    {% if humidity_enabled %}
+      <button type="submit" name="toggle_humidity">Выключить влажность</button>
+    {% else %}
+      <button type="submit" name="toggle_humidity">Включить влажность</button>
+    {% endif %}
+  </form>
+
+  <p>Максимальная температура, которую можно установить: {{ max_temperature }}°C</p>
+
+  {% if temperature and temperature_enabled %}
+    <p>Текущая температура: {{ temperature }}°C</p>
+  {% else %}
+    <p>Нет сохраненных данных о температуре</p>
+  {% endif %}
+
+  {% if humidity and humidity_enabled %}
+    <p>Текущая влажность: {{ humidity }}%</p>
+  {% else %}
+    <p>Нет сохраненных данных о влажности.</p>
+  {% endif %}
+{% endblock %}
