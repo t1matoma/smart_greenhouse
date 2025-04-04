@@ -3,7 +3,7 @@
 {% block heading %}Здесь вы можете управлять вентиляцией!{% endblock %}
 {% block content %}
 
-  <p>Привет, {{ user.username }}!</p>  <!-- Показываем имя пользователя -->
+  <p>Привет, {{ user.username }}!</p>  
   <p>Статус вентиляции: <strong>{{ ventilation_status.get_status_display }}</strong></p>
 
   <form method="post">
