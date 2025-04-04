@@ -10,7 +10,6 @@ def lighting(request):
     if not greenhouse:
         return render(request, "lighting/lighting.html", {"error": "У вас нет теплицы."})
 
-    # Получаем статус освещения этой теплицы
     lighting_status, _ = LightingStatus.objects.get_or_create(greenhouse=greenhouse)
 
     if request.method == "POST":
