@@ -1,14 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Ventilation
-from temp_n_humidity.models import TempAndHumidity  # Импортируем модель температуры и влажности
+from temp_n_humidity.models import TempAndHumidity 
 
-@login_required  # Требуется авторизация пользователя
+@login_required
 def ventilation(request):
-    # Получаем текущий статус вентиляции для пользователя (или создаем, если его нет)
     ventilation_status, created = Ventilation.objects.get_or_create(user=request.user)
 
-    # Получаем последние данные о температуре и влажности для этого пользователя
     temp_and_humidity = TempAndHumidity.objects.filter(user=request.user).last()
 
     # Если данных о температуре и влажности нет, выводим значения по умолчанию
@@ -20,10 +18,9 @@ def ventilation(request):
         humidity = "Нет данных"
 
     if request.method == "POST":
-        # Переключаем статус вентиляции
         ventilation_status.status = "off" if ventilation_status.status == "on" else "on"
         ventilation_status.save()
-        return redirect("ventilation")  # Перезагрузка страницы после изменения
+        return redirect("ventilation")
 
     return render(request, "ventilation/ventilation.html", {
         "ventilation_status": ventilation_status,
