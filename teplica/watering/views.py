@@ -8,7 +8,7 @@ def watering(request):
     watering_status, created = WateringStatus.objects.get_or_create(user=request.user)
 
     if request.method == 'POST':
-        action = request.POST.get('action')  # Получаем действие из формы
+        action = request.POST.get('action')  
         print(f"POST запрос пришел! Действие: {action}")
 
         if action == 'stop' and watering_status and watering_status.status == 'started':
