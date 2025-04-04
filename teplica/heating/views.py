@@ -15,9 +15,9 @@ def heating(request):
     if request.method == 'POST':
         action = request.POST.get('action')
 
-        if action == 'toggle':  # Переключить состояние (вкл/выкл)
+        if action == 'toggle': 
             heating_status.status = 'off' if heating_status.status == 'on' else 'on'
-        elif action == 'set_temp':  # Установить новую температуру
+        elif action == 'set_temp':  
             new_temp = request.POST.get('temperature')
             if new_temp:
                 heating_status.temperature = int(new_temp)
