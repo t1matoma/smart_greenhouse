@@ -11,7 +11,7 @@
       Температура: <strong>{{ heating_status.temperature }}°C</strong>
     </p>
 
-    <!-- Форма для включения/выключения отопления -->
+
     <form method="post">
       {% csrf_token %}
       <input type="hidden" name="action" value="toggle">
@@ -24,7 +24,7 @@
       </button>
     </form>
 
-    <!-- Форма для изменения температуры -->
+    
     <form method="post">
       {% csrf_token %}
       <input type="hidden" name="action" value="set_temp">
