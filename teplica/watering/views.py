@@ -5,28 +5,24 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def watering(request):
-    # Получаем полив, привязанный к текущему пользователю
     watering_status, created = WateringStatus.objects.get_or_create(user=request.user)
 
     if request.method == 'POST':
         action = request.POST.get('action')  # Получаем действие из формы
         print(f"POST запрос пришел! Действие: {action}")
 
-        # Остановка полива
         if action == 'stop' and watering_status and watering_status.status == 'started':
             watering_status.status = 'stopped'
             watering_status.save()
             print("Полив остановлен через веб-интерфейс.")
             return redirect('watering')
 
-        # Отложить полив на 1 час
         elif action == 'postpone' and watering_status:
             watering_status.postponed_time = timezone.now() + timezone.timedelta(hours=1)
             watering_status.save()
             print("Полив отложен на 1 час.")
             return redirect('watering')
 
-        # Сохранение изменений
         elif action == 'save_changes' and watering_status:
             new_watering_days = request.POST.get('watering_days')
             new_watering_time = request.POST.get('watering_time')
