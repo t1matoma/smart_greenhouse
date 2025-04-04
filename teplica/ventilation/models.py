@@ -8,7 +8,7 @@ class Ventilation(models.Model):
     ]
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Привязка к пользователю
-    status = models.CharField(max_length=3, choices=STATUS_CHOICES, default='off')  # Статус вентиляции
+    status = models.CharField(max_length=3, choices=STATUS_CHOICES, default='off') 
 
     def __str__(self):
         return f"Вентиляция пользователя {self.user.username}: {self.get_status_display()}"
