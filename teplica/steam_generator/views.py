@@ -10,7 +10,7 @@ def steam_generator(request):
     if not greenhouse:
         return render(request, "steam_generator/steam_generator.html", {"error": "У вас нет теплицы."})
 
-    # Получаем статус пароиспарения этой теплицы
+    
     evaporation_settings, _ = Evaporation.objects.get_or_create(greenhouse=greenhouse)
 
     if request.method == "POST":
