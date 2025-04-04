@@ -7,7 +7,7 @@ class Ventilation(models.Model):
         ('off', 'Выключено'),
     ]
     
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Привязка к пользователю
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  
     status = models.CharField(max_length=3, choices=STATUS_CHOICES, default='off') 
 
     def __str__(self):
