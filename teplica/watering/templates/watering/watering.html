@@ -18,7 +18,6 @@
       {% endif %}
   </p>
 
-  <!-- Форма сохранения изменений -->
   <form method="post">
     {% csrf_token %}
     <input type="hidden" name="action" value="save_changes">
@@ -47,14 +46,12 @@
     <button type="submit">Сохранить изменения</button>
   </form>
 
-  <!-- Форма для отложения полива -->
   <form method="post">
     {% csrf_token %}
     <input type="hidden" name="action" value="postpone">
     <button type="submit">Отложить полив на 1 час</button>
   </form>
 
-  <!-- Форма для остановки полива -->
   <form method="post">
     {% csrf_token %}
     <input type="hidden" name="action" value="stop">
