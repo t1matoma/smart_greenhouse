@@ -9,13 +9,12 @@ class WateringStatus(models.Model):
         ('stopped', 'Полив остановлен'),
     ]
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='stopped')
-    duration = models.PositiveIntegerField(default=0)  # Длительность полива в минутах
-    volume = models.PositiveIntegerField(default=0)  # Объем полива в литрах
+    duration = models.PositiveIntegerField(default=0) 
+    volume = models.PositiveIntegerField(default=0)  
     created_at = models.DateTimeField(auto_now_add=True)
     watering_time = models.TimeField(null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Привязка к пользователю
+    user = models.ForeignKey(User, on_delete=models.CASCADE) 
 
-    # Новые поля для хранения дней недели и времени полива
     watering_days = models.CharField(max_length=255, blank=True, null=True)  # Дни недели, например, "Понед, Среда, Пятница"
     postponed_time = models.DateTimeField(null=True, blank=True)  # Отложенное время полива
 
@@ -23,11 +22,10 @@ class WateringStatus(models.Model):
         return f'{self.status} с {self.created_at}'
 
     def get_next_watering(self):
-        # Логика для вычисления ближайшего полива
         if self.watering_days and self.watering_time:
-            days = self.watering_days.split(', ')  # Разделяем дни
-            current_day = timezone.now().weekday()  # Получаем текущий день недели
-            current_time = timezone.now().time()  # Получаем текущее время
+            days = self.watering_days.split(', ')
+            current_day = timezone.now().weekday() 
+            current_time = timezone.now().time() 
 
             watering_time = self.watering_time
 
@@ -45,7 +43,7 @@ class WateringStatus(models.Model):
             # Для каждого дня полива ищем ближайшее время
             next_watering_date = None
             for day in days:
-                day = day.strip().lower()  # Приводим к нижнему регистру и убираем лишние пробелы
+                day = day.strip().lower() 
                 watering_day = weekday.get(day)
 
                 print(f"Обрабатываем день: {day}, код дня: {watering_day}")
