@@ -1,0 +1,45 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умная Теплица</title>
+    <link rel="stylesheet" href="{% static "main/css/styles.css" %}">
+</head>
+<body class="bg-gray-100 font-sans">
+    <header class="bg-green-600 text-white p-4 shadow-md">
+        <h1 class="text-2xl font-bold">{%block header%}{%endblock%}</h1>
+    </header>
+    
+    <div class="flex">
+        <!-- Sidebar -->
+        <nav class="w-1/4 bg-green-100 h-screen p-4">
+            <ul class="space-y-4">
+                <li><a href="{% url "home" %}" class="block text-lg font-medium text-green-800 hover:text-green-500">Умная теплица</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url "watering" %}" class="block text-lg font-medium text-green-800 hover:text-green-500">Полив</a></li>
+                    <li><a href="{% url "lighting" %}" class="block text-lg font-medium text-green-800 hover:text-green-500">Освещение</a></li>
+                    <li><a href="{% url "heating" %}" class="block text-lg font-medium text-green-800 hover:text-green-500">Отопление</a></li>
+                    <li><a href="{% url "temp_n_humidity" %}" class="block text-lg font-medium text-green-800 hover:text-green-500">Температура и влажность</a></li>
+                    <li><a href="{% url "steam_generator" %}" class="block text-lg font-medium text-green-800 hover:text-green-500">Пароиспарение</a></li>
+                    <li><a href="{% url "ventilation" %}" class="block text-lg font-medium text-green-800 hover:text-green-500">Вентиляция</a></li>
+                    <li><a href="{% url 'profile' %}">Мой профиль</a></li>
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                {%else%}
+                <li><a href="{% url "login" %}" class="block text-lg font-medium text-green-800 hover:text-green-500">Вход в аккаунт</a></li>
+                {%endif%}
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="w-3/4 p-6">
+            <h2 class="text-xl font-bold mb-4">{%block heading%}{%endblock%}</h2>
+            {%block content%}{%endblock%}
+        </main>
+    </div>
+</body>
+</html>

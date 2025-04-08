@@ -1,0 +1,33 @@
+{% extends "main/index.html" %}
+{% block header %}Освещение{% endblock %}
+{% block heading %}Здесь вы можете управлять освещением!{% endblock %}
+{% block content %}
+  {% if error %}
+    <p>{{ error }}</p>
+  {% else %}
+    <p>Статус освещения: {{ lighting_status.get_status_display }}</p>
+
+    <p class="text-gray-700">
+      Время включения освещения: {{ lighting_status.start_time|date:"H:i" }}
+      <br>
+      Время выключения освещения: {{ lighting_status.end_time|date:"H:i" }}
+    </p>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" name="turn_on">Включить освещение</button>
+      <button type="submit" name="turn_off">Выключить освещение</button>
+    </form>
+
+    <form method="post">
+      {% csrf_token %}
+      <label for="start_time">Время включения:</label>
+      <input type="time" id="start_time" name="start_time" value="{{ lighting_status.start_time|default_if_none:'' }}">
+      
+      <label for="end_time">Время выключения:</label>
+      <input type="time" id="end_time" name="end_time" value="{{ lighting_status.end_time|default_if_none:'' }}">
+
+      <button type="submit" name="save_settings">Сохранить настройки</button>
+    </form>
+  {% endif %}
+{% endblock %}

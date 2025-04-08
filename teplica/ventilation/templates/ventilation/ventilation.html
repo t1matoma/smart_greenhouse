@@ -1,0 +1,20 @@
+{% extends "main/index.html" %}
+{% block header %}Вентиляция{% endblock %}
+{% block heading %}Здесь вы можете управлять вентиляцией!{% endblock %}
+{% block content %}
+
+  <p>Привет, {{ user.username }}!</p>  
+  <p>Статус вентиляции: <strong>{{ ventilation_status.get_status_display }}</strong></p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">
+      {% if ventilation_status.status == 'on' %}Выключить{% else %}Включить{% endif %}
+    </button>
+  </form>
+
+  <h3>Текущая температура и влажность:</h3>
+  <p>Температура: {{ temperature }}°C</p>
+  <p>Влажность: {{ humidity }}%</p>
+
+{% endblock %}

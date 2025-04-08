@@ -1,0 +1,38 @@
+{% extends "main/index.html" %}
+{% block header %}Отопление{% endblock %}
+{% block heading %}Здесь вы можете управлять отоплением!{% endblock %}
+{% block content %}
+  {% if error %}
+    <p>{{ error }}</p>
+  {% else %}
+    <p>
+      Статус отопления: <strong>{{ heating_status.get_status_display }}</strong>
+      <br>
+      Температура: <strong>{{ heating_status.temperature }}°C</strong>
+    </p>
+
+
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="toggle">
+      <button type="submit">
+        {% if heating_status.status == "on" %}
+          Выключить отопление
+        {% else %}
+          Включить отопление
+        {% endif %}
+      </button>
+    </form>
+
+    
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="set_temp">
+
+      <label for="temperature">Температура:</label>
+      <input type="number" id="temperature" name="temperature" value="{{ heating_status.temperature }}" min="5" max="30">
+      
+      <button type="submit">Изменить температуру</button>
+    </form>
+  {% endif %}
+{% endblock %}
