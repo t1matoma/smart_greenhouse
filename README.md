@@ -37,7 +37,7 @@ A prototype system for personalized smart greenhouse control, where each user ma
 ### Installation
 ```bash
 # 1. Clone repository
-git clone https://github.com/smart_greenhouse/.git
+git clone https://github.com/t1matoma/smart_greenhouse.git
 cd smart_greenhouse
 ```
 ###  Environment Configuration
