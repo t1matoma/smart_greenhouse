@@ -4,6 +4,7 @@
 
 # Django
 *.log
+*/staticfiles/
 
 # Virtual environments
 venv/
