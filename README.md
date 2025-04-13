@@ -1,7 +1,7 @@
 # Smart Greenhouse Prototype  
 *A Django-based web application for managing greenhouse parameters*  
 
-[![Django](https://img.shields.io/badge/Django-3.2-green)](https://www.djangoproject.com/) 
+[![Django](https://img.shields.io/badge/Django-5.1-green)](https://www.djangoproject.com/) 
 
 A prototype system for personalized smart greenhouse control, where each user manages their virtual greenhouse environment.  
 
@@ -24,7 +24,7 @@ A prototype system for personalized smart greenhouse control, where each user ma
 ##  Tech Stack
 | Category       | Technologies                         |
 |----------------|--------------------------------------|
-| Backend        | Django 4.2+, Python 3.10+            |
+| Backend        | Django 5.1+, Python 3.10+            |
 | Frontend       | HTML5, CSS3                          |
 
 ## Quick Start with Docker
