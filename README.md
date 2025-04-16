@@ -64,6 +64,7 @@ To start the application with Docker, you can use the provided script `run.sh`, 
 2. Run the following command to start the application:
 
 ```bash
+    chmod +x run.sh
    ./run.sh
 ```
 
