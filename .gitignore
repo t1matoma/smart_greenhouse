@@ -5,6 +5,8 @@
 # Django
 *.log
 */staticfiles/
+*.sqlite3
+**/db.sqlite3
 
 # Virtual environments
 venv/
